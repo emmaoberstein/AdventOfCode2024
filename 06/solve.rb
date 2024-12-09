@@ -21,7 +21,7 @@ def non_cyclical_guard_positions(map, start)
   current_direction = [-1, 0]
 
   while in_bounds(map, current_pos)
-    return nil if visited_with_direction.key?(current_pos.clone + current_direction.clone) 
+    return nil if visited_with_direction.key?(current_pos + current_direction) 
     
     visited[current_pos.clone] = true    
     visited_with_direction[current_pos.clone + current_direction.clone] = true
@@ -62,7 +62,7 @@ map.each_index do |i|
   map[i].each_index do |j|
     if map[i][j]   
       map_clone[i][j] = false
-      total+= 1 if non_cyclical_guard_positions(map_clone, start).nil?
+      total+= 1 if non_cyclical_guard_positions(map_clone, start) == nil
       map_clone[i][j] = true
     end
   end
